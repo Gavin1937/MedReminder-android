@@ -78,7 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                 try (FileOutputStream fos = getApplication()
                     .openFileOutput(GlobVariables.CACHE_FILENAME, Context.MODE_PRIVATE)
                 ) {
-                    JSONObject out = client.jsonObject().put("username", usernameStr);
+                    JSONObject out = new JSONObject();
+                    out = out.put("login", client.jsonObject().put("username", usernameStr));
                     fos.write(out.toString().getBytes(StandardCharsets.US_ASCII));
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

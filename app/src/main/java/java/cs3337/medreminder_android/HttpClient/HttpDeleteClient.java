@@ -7,9 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.cs3337.medreminder_android.Util.GlobVariables;
+import java.cs3337.medreminder_android.Util.Utilities;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpDeleteClient extends AsyncTask {
@@ -26,22 +29,20 @@ public class HttpDeleteClient extends AsyncTask {
 
         Request.Builder builder = new Request.Builder();
         builder
-                .url((String)params[0])
-                .addHeader("Content-Type", "application/json")
-                .delete()
+            .url((String)params[0])
+            .addHeader("Content-Type", "application/json")
+            .addHeader("username", Utilities.getUsername())
+            .addHeader("secret", Utilities.getSecret())
         ;
-        if (GlobVariables.LOGIN_INFO != null)
-        {
-            try {
-                builder.addHeader(
-                "username", GlobVariables.LOGIN_INFO.getString("username")
-                );
-                builder.addHeader(
-                "secret", GlobVariables.LOGIN_INFO.getString("secret")
-                );
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        // have body
+        if (params.length == 2) {
+            builder.delete(RequestBody.create(
+                    (String)params[1],
+                    MediaType.parse("application/json")
+            ));
+        }
+        else {
+            builder.delete();
         }
         Request request = builder.build();
 

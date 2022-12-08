@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.cs3337.medreminder_android.HttpClient.HttpGetClient;
 import java.cs3337.medreminder_android.Util.GlobVariables;
+import java.cs3337.medreminder_android.Util.Utilities;
 
 public class MedInfoActivity extends AppCompatActivity {
 
@@ -50,10 +51,10 @@ public class MedInfoActivity extends AppCompatActivity {
                     " Day"
                 );
                 ((TextView)findViewById(R.id.medinfo_early_str)).setText(
-                    militaryTimeToStr(medInfoJson.getInt("early_time"))
+                    Utilities.militaryTimeToStr(medInfoJson.getInt("early_time"))
                 );
                 ((TextView)findViewById(R.id.medinfo_late_str)).setText(
-                    militaryTimeToStr(medInfoJson.getInt("late_time"))
+                    Utilities.militaryTimeToStr(medInfoJson.getInt("late_time"))
                 );
             } catch (JSONException e) {
                 ((TextView)findViewById(R.id.medinfo_id_str)).setText(
@@ -99,15 +100,6 @@ public class MedInfoActivity extends AppCompatActivity {
 
     }
 
-    private String militaryTimeToStr(Integer militaryTime)
-    {
-        int hr = militaryTime / 100;
-        int mi = militaryTime % 100;
-        return (
-            String.format("%1$" + 2 + "s", hr).replace(' ', '0') +
-            ":" +
-            String.format("%1$" + 2 + "s", mi).replace(' ', '0')
-        );
-    }
+
 
 }

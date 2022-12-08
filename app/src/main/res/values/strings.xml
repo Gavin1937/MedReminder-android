@@ -19,4 +19,5 @@
     <string name="first_notification_time_str">First Notification Time</string>
     <string name="second_notification_time_str">Second Notification Time</string>
     <string name="my_medicine_str">My Medicine</string>
+    <string name="notoi_btn_str">I already take my medicine</string>
 </resources>
