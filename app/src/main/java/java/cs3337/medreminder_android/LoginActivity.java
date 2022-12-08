@@ -31,9 +31,14 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginbtn = findViewById(R.id.button);
         loginbtn.setOnClickListener(v -> {
-            // Collect user input
             TextInputLayout username = findViewById(R.id.login_username_edit);
             TextInputLayout password = findViewById(R.id.login_password_edit);
+            // disable everything
+            loginbtn.setEnabled(false);
+            username.setEnabled(false);
+            password.setEnabled(false);
+
+            // Collect user input
             String usernameStr = Objects.requireNonNull(
                 ((TextInputLayout) username.getChildAt(1)).getEditText()
             ).getText().toString();
@@ -61,10 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            System.out.println(param);
-            System.out.println("ok = " + client.ok + ", status = " + client.status);
-            System.out.println("hasPayload(): " + client.hasPayload());
-            System.out.println(client.payload);
 
             // handle response
             TextView errmsg = findViewById(R.id.errmsg);
@@ -77,8 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                 try (FileOutputStream fos = getApplication()
                     .openFileOutput(GlobVariables.CACHE_FILENAME, Context.MODE_PRIVATE)
                 ) {
-                    fos.write(client.payload.getBytes(StandardCharsets.US_ASCII));
-                } catch (IOException e) {
+                    JSONObject out = client.jsonObject().put("username", usernameStr);
+                    fos.write(out.toString().getBytes(StandardCharsets.US_ASCII));
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
 

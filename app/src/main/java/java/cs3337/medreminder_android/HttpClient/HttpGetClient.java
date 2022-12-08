@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.cs3337.medreminder_android.Util.GlobVariables;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,6 +30,19 @@ public class HttpGetClient extends AsyncTask {
             .addHeader("Content-Type", "application/json")
             .get()
         ;
+        if (GlobVariables.LOGIN_INFO != null)
+        {
+            try {
+                builder.addHeader(
+                "username", GlobVariables.LOGIN_INFO.getString("username")
+                );
+                builder.addHeader(
+                "secret", GlobVariables.LOGIN_INFO.getString("secret")
+                );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         Request request = builder.build();
 
         try {

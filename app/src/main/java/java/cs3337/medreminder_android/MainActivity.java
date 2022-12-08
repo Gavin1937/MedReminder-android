@@ -1,8 +1,10 @@
 package java.cs3337.medreminder_android;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +13,6 @@ import org.json.JSONObject;
 
 import java.cs3337.medreminder_android.HttpClient.HttpGetClient;
 import java.cs3337.medreminder_android.Util.GlobVariables;
-import java.cs3337.medreminder_android.Util.Utilities;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,45 +23,64 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         GlobVariables.IS_LOGGED_IN = loginCheck();
 
-        if (GlobVariables.IS_LOGGED_IN) {
-            setContentView(R.layout.activity_main);
-        }
-        else { // go to login page
+        // go to login page
+        if (!GlobVariables.IS_LOGGED_IN) {
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
             setContentView(R.layout.activity_login);
         }
 
-        String url = "https://httpbin.org/post";
 
-        Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(view -> {
-            HttpGetClient client = new HttpGetClient();
-            client.execute(url, Utilities.md5("hello"));
-            while (!client.ready && !client.ok) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        // fetch user info
+        // make request
+        HttpGetClient fetchInfo = new HttpGetClient();
+        fetchInfo.execute(GlobVariables.API_URL+"/api/user/me");
+        while (!fetchInfo.ready && !fetchInfo.ok) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println("ok = " + client.ok + ", status = " + client.status);
-            System.out.println("hasPayload(): " + client.hasPayload());
-            System.out.println(client.payload);
+        }
 
-        });
+
+        // setting up main activity
+        setContentView(R.layout.activity_main);
+
+
+        // print userinfo on screen
+        TextView infoview = findViewById(R.id.info_txtview);
+        if (fetchInfo.ok) {
+            try {
+                JSONObject userinfoJson = fetchInfo.jsonObject().getJSONObject("pat_info");
+                String output =
+                    "Name: " + userinfoJson.getString("fname") + " " +
+                    userinfoJson.getString("lname") + "\n" +
+                    "Phone: " + userinfoJson.getString("phone") + "\n" +
+                    "Email: " + userinfoJson.getString("email")
+                ;
+                infoview.setText(output);
+            } catch (JSONException e) {
+                infoview.setText("Fail to fetch User Information. Are you a Patient in the system?");
+            }
+        }
+        else {
+            infoview.setText("Fail to fetch User Information.");
+        }
 
         // logout button
         Button logout_btn = findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(view -> {
             getApplicationContext().deleteFile(GlobVariables.CACHE_FILENAME);
             GlobVariables.IS_LOGGED_IN = false;
+            GlobVariables.LOGIN_INFO = null;
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         });
