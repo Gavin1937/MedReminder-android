@@ -15,7 +15,9 @@ public class HttpDeleteClient extends AsyncTask {
     private final OkHttpClient client = new OkHttpClient();
     public boolean ready = false;
     public boolean ok = false;
+    public int status = -1;
     public String payload = null;
+    public JSONObject obj = null;
 
     @Override
     protected String doInBackground(Object[] params) {
@@ -31,10 +33,17 @@ public class HttpDeleteClient extends AsyncTask {
         try {
             Response response = client.newCall(request).execute();
             String body = response.body().string();
-            payload = body;
-
+            if (body != null && !body.trim().isEmpty()) {
+                JSONObject obj = new JSONObject(body);
+                payload = obj.getString("payload");
+                ok = obj.getBoolean("ok");
+                status = obj.getInt("status");
+            }
+            else {
+                ok = false;
+                status = -1;
+            }
             ready = true;
-            ok = true;
             return body;
         } catch (Exception e) {
             ready = true;
@@ -52,7 +61,9 @@ public class HttpDeleteClient extends AsyncTask {
 
     public JSONObject jsonObject() throws JSONException
     {
-        if (this.payload != null)
+        if (this.payload != null && this.obj != null)
+            return this.obj;
+        else if (this.payload != null && this.obj == null)
             return (new JSONObject(this.payload));
         throw new JSONException("Payload is null.");
     }

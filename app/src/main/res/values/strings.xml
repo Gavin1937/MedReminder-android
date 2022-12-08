@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">MedReminder</string>
-    <string name="sign_in_str">Sign In</string>
+    <string name="sign_in_str">Login to MedReminder</string>
     <string name="username_str">Username</string>
     <string name="password_str">Password</string>
     <string name="login_str">Login</string>
+    <string name="errmsg_txt">Failed to Login.\nWrong Username or Password.</string>
+    <string name="logout_txt">Logout</string>
 </resources>

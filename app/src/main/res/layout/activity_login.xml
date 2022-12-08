@@ -4,12 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:textAlignment="center"
     tools:context=".LoginActivity">
 
     <TextView
+        android:id="@+id/errmsg"
+        android:layout_width="368dp"
+        android:layout_height="72dp"
+        android:text="@string/errmsg_txt"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.255" />
+
+    <TextView
         android:id="@+id/prompt"
-        android:layout_width="161dp"
-        android:layout_height="67dp"
+        android:layout_width="309dp"
+        android:layout_height="112dp"
         android:gravity="center|center_horizontal|center_vertical"
         android:text="@string/sign_in_str"
         android:textColor="#000000"
@@ -82,15 +101,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password_edit" />
-
-    <TextView
-        android:id="@+id/msg"
-        android:layout_width="252dp"
-        android:layout_height="104dp"
-        android:gravity="center|center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
