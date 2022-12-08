@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.cs3337.medreminder_android.HttpClient.HttpGetClient;
 import java.cs3337.medreminder_android.Util.GlobVariables;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -38,42 +36,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        // fetch user info
-        // make request
-        HttpGetClient fetchInfo = new HttpGetClient();
-        fetchInfo.execute(GlobVariables.API_URL+"/api/user/me");
-        while (!fetchInfo.ready && !fetchInfo.ok) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
         // setting up main activity
         setContentView(R.layout.activity_main);
 
 
-        // print userinfo on screen
-        TextView infoview = findViewById(R.id.info_txtview);
-        if (fetchInfo.ok) {
-            try {
-                JSONObject userinfoJson = fetchInfo.jsonObject().getJSONObject("pat_info");
-                String output =
-                    "Name: " + userinfoJson.getString("fname") + " " +
-                    userinfoJson.getString("lname") + "\n" +
-                    "Phone: " + userinfoJson.getString("phone") + "\n" +
-                    "Email: " + userinfoJson.getString("email")
-                ;
-                infoview.setText(output);
-            } catch (JSONException e) {
-                infoview.setText("Fail to fetch User Information. Are you a Patient in the system?");
-            }
-        }
-        else {
-            infoview.setText("Fail to fetch User Information.");
-        }
+        // profile button
+        Button profile_btn = findViewById(R.id.profile_btn);
+        profile_btn.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(i);
+        });
 
         // logout button
         Button logout_btn = findViewById(R.id.logout_btn);
@@ -84,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         });
+
     }
 
     private boolean loginCheck() {
