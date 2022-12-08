@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MedInfoActivity">
+
+    <TextView
+        android:id="@+id/medinfo_desc_str"
+        android:layout_width="369dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_desc" />
+
+    <TextView
+        android:id="@+id/medinfo_freq"
+        android:layout_width="233dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/frequency_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_desc_str" />
+
+    <TextView
+        android:id="@+id/medinfo_freq_str"
+        android:layout_width="127dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/medinfo_freq"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_desc_str" />
+
+    <TextView
+        android:id="@+id/medinfo_early_str"
+        android:layout_width="300dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_early" />
+
+    <TextView
+        android:id="@+id/medinfo_late_str"
+        android:layout_width="300dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_late" />
+
+    <TextView
+        android:id="@+id/medinfo_late"
+        android:layout_width="300dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/second_notification_time_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_early_str" />
+
+    <TextView
+        android:id="@+id/medinfo_early"
+        android:layout_width="300dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/first_notification_time_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_freq" />
+
+    <TextView
+        android:id="@+id/medinfo_desc"
+        android:layout_width="129dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/description_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_name" />
+
+    <TextView
+        android:id="@+id/medinfo_name_str"
+        android:layout_width="275dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/medinfo_name"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_id_str" />
+
+    <TextView
+        android:id="@+id/medinfo_name"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/name_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_id" />
+
+    <TextView
+        android:id="@+id/medinfo_prompt"
+        android:layout_width="298dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/my_medicine_str"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/medinfo_id_str"
+        android:layout_width="275dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:gravity="start|center_vertical"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/medinfo_id"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_prompt" />
+
+    <TextView
+        android:id="@+id/medinfo_id"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/id_str"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medinfo_prompt" />
+</androidx.constraintlayout.widget.ConstraintLayout>

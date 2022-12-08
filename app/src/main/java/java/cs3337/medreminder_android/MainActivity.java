@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         });
 
+        // med info button
+        Button medinfo_btn = findViewById(R.id.med_info_btn);
+        medinfo_btn.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), MedInfoActivity.class);
+            startActivity(i);
+        });
+
         // logout button
         Button logout_btn = findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(view -> {

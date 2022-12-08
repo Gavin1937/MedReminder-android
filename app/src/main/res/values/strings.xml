@@ -12,4 +12,11 @@
     <string name="doc_profile_str">My Doctor\'s Profile</string>
     <string name="my_profile_str">My Profile</string>
     <string name="profile_txt">Profile</string>
+    <string name="medication_information_txt">Medication Information</string>
+    <string name="id_str">Id</string>
+    <string name="description_str">Description</string>
+    <string name="frequency_str">Take medicine every: </string>
+    <string name="first_notification_time_str">First Notification Time</string>
+    <string name="second_notification_time_str">Second Notification Time</string>
+    <string name="my_medicine_str">My Medicine</string>
 </resources>
