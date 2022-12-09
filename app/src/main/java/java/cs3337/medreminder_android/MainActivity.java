@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
 //            // hide button
 //            noti_btn.setEnabled(false);
 //            noti_btn.setVisibility(View.INVISIBLE);
+
+            // schedule next notification
+            scheduleNotification();
         });
 
         // update noti prompt for startup

@@ -71,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
             TextView errmsg = findViewById(R.id.errmsg);
             if (!client.ok) {
                 errmsg.setVisibility(View.VISIBLE);
+                // enable inputs
+                loginbtn.setEnabled(true);
+                username.setEnabled(true);
+                password.setEnabled(true);
             }
             else {
                 errmsg.setVisibility(View.INVISIBLE);
