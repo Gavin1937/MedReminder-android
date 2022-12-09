@@ -11,6 +11,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import java.cs3337.medreminder_android.Util.GlobVariables;
+import java.cs3337.medreminder_android.Util.Utilities;
+import java.util.Calendar;
 
 public class NotificationBroadcast extends BroadcastReceiver {
 
@@ -25,8 +27,14 @@ public class NotificationBroadcast extends BroadcastReceiver {
             GlobVariables.notificationMessage.getMessage() == null
         )
         {
-            locTitle = "This is title";
-            locMessage = "This is the content of the notification";
+            Calendar nextTime = Utilities.nextNotiTime();
+            String timeStr;
+            if (nextTime == null)
+                timeStr = "";
+            else
+                timeStr = Utilities.calendarToStr(nextTime);
+            locTitle = "It's Time to Take Your Medicine.";
+            locMessage = "Please Take Your Medicine At: " + timeStr;
         }
         else {
             locTitle = GlobVariables.notificationMessage.getTitle();
