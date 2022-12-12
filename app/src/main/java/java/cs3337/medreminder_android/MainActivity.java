@@ -255,10 +255,15 @@ public class MainActivity extends AppCompatActivity {
     {
         Calendar nextTime = Utilities.nextNotiTime();
         String timeStr;
-        if (nextTime == null)
+        long time;
+        if (nextTime == null) {
             timeStr = "";
-        else
+            time = Utilities.getUnixTimestamp() * 1000L;
+        }
+        else {
             timeStr = Utilities.calendarToStr(nextTime);
+            time = nextTime.getTimeInMillis();
+        }
         Intent intent = new Intent(this, NotificationBroadcast.class);
         String title = "It's Time to Take Your Medicine.";
         String message = "Please Take Your Medicine At: " + timeStr;
@@ -272,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long time = nextTime.getTimeInMillis();
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             time,
